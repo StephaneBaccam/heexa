@@ -21,7 +21,10 @@ public class PlayerInventory : MonoBehaviour
     Image hpImage;
     Image manaImage;
     Image barreXp;
-    public Text level;
+    private Text level;
+    private Text txtHP;
+    private Text txtMana;
+    private Text txtExp;
 
     public int lvlPlayer = 1;
     
@@ -35,16 +38,19 @@ public class PlayerInventory : MonoBehaviour
     public float currentDamage = 0;
     public float currentArmor = 0;
     public float currentXp = 0;
-    public float rateXp = 1.15F;
-    public float rateDam = 1.2F;
+    public float rateXp = 1.2F;
+    public float rateDam = 1.4F;
     public float rateArm = 1.2F;
+    public float rateHealth = 1.4F;
+    public float rateMana = 1.2F;
     public float maxXp = 100;
 
     int normalSize = 3;
 
-    public CharacterMotor characterMotor;
-    public Animation playerAnimation;
-    public EnemyAI enemyAi;
+    private CharacterMotor characterMotor;
+    private Animation playerAnimation;
+    private EnemyAI enemyAi;
+    private EnemyAILancer enemyAiLancer;
 
     public void OnEnable()
     {
@@ -172,8 +178,11 @@ public class PlayerInventory : MonoBehaviour
         manaImage = GameObject.Find("currentMana").GetComponent<Image>();
         barreXp = GameObject.Find("currentEXP").GetComponent<Image>();
         level = GameObject.Find("Level").GetComponent<Text>();
+        txtHP = GameObject.Find("txtHP").GetComponent<Text>();
+        txtMana = GameObject.Find("txtMana").GetComponent<Text>();
+        txtExp = GameObject.Find("txtEXP").GetComponent<Text>();
         enemyAi = gameObject.GetComponent<EnemyAI>();
-
+        enemyAiLancer = gameObject.GetComponent<EnemyAILancer>();
         characterMotor = gameObject.GetComponent<CharacterMotor>();
         playerAnimation = gameObject.GetComponent<Animation>();
 
@@ -198,7 +207,7 @@ public class PlayerInventory : MonoBehaviour
     {
         if (!characterMotor.isDead)
         {
-            currentHealth = currentHealth - (Damage - ((currentArmor * Damage) / 100));
+            currentHealth -= (Damage - ((currentArmor * Damage) / 100));
             if (currentHealth <= 0)
             {
                 Dead();
@@ -298,6 +307,10 @@ public class PlayerInventory : MonoBehaviour
         maxXp = maxXp * rateXp;
         currentArmor = currentArmor * rateArm;
         currentDamage = currentDamage * rateDam;
+        maxHealth = maxHealth * rateHealth;
+        maxMana = maxMana * rateMana;
+        currentHealth = maxHealth;
+        currentMana = maxMana;
         SetLevelText();
     }
 
@@ -311,12 +324,15 @@ public class PlayerInventory : MonoBehaviour
     {
         float percentageHP = ((currentHealth) * 100 / maxHealth / 100);
         hpImage.fillAmount = percentageHP;
+        txtHP.text = currentHealth + "/" + maxHealth;
 
         float percentageMana = ((currentMana) * 100 / maxMana/ 100);
         manaImage.fillAmount = percentageMana;
+        txtMana.text = currentMana + "/" + maxMana;
 
         float pourcentageXp = ((currentXp) * 100 / maxXp / 100);
         barreXp.fillAmount = pourcentageXp;
+        txtExp.text = currentXp+ "/" + maxXp;
 
         if (Input.GetKeyDown(KeyCode.L))  //Test si la le gain d'exp marche
 		{

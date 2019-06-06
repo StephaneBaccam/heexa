@@ -47,6 +47,8 @@ public class CharacterMotor : MonoBehaviour
     //Etat du perso
     public bool isDead = false;
 
+    public GameObject Zone;
+
     void Start()
     {
         animations = gameObject.GetComponent<Animation>();                          //la variable animations contiendra les différents animations
@@ -210,6 +212,10 @@ public class CharacterMotor : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             count = count + 1;
+            if(count==5)
+            {
+                Zone.SetActive(true);
+            }
             SetCountText();
             playerInv.GainExp(1000);
         }
