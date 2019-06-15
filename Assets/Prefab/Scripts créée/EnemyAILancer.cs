@@ -111,12 +111,18 @@ public class EnemyAILancer : MonoBehaviour
     //Si le personnage est dans la zone de recherche de l'ennemi
     void chase()
     {
+        if (isAttacking == false)
+        {
             animations.Play("Run");
             agent.destination = Target.position;
+        }
     }
 
     void attack()
     {
+        //Empeche l'ennemi de traverser le joueur
+        agent.destination = transform.position;
+
         if (Time.time > attTime)
         {
             animations.Play("Skill3");
@@ -125,14 +131,17 @@ public class EnemyAILancer : MonoBehaviour
             Debug.Log("L'ennemi a fait " + Damage + " points de dégâts");
             attTime = Time.time + attCooldown;
         }
+        isAttacking = false;
     }
 
     //Retour à la base 
     public void BackBase()
     {
-        animations.Play("Run");
-        agent.destination = basePosition;
-
+        if (isAttacking == false)
+        {
+            animations.Play("Run");
+            agent.destination = basePosition;
+        }
     }
 
     public void Dead()

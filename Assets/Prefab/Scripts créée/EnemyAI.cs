@@ -76,32 +76,34 @@ public class EnemyAI : MonoBehaviour
             else if (Distance < chaseRange && Distance > attRange)
             {
                 chase();
+                
             }
 
             //Si l'ennemi est assez proche pour attaquer
             else if (Distance < attRange)
             {
                 attack();
+                
             }
-        }
-    }
 
-    //Si le personnage est dans la zone de recherche de l'ennemi
-    void chase()
-    {
-        agent.destination = Target.position;
-    }
+            //Si le personnage est dans la zone de recherche de l'ennemi
+            void chase()
+            {
+                agent.destination = Target.position;
+            }
 
-    void attack()
-    {
-        //Empeche l'ennemi de traverser le joueur
-        agent.destination = transform.position;
+            void attack()
+            {
+                //Empeche l'ennemi de traverser le joueur
+                agent.destination = transform.position;
 
-        if (Time.time > attTime)
-        {
-            Target.GetComponent<PlayerInventory>().ApplyDamage(Damage);
-            Debug.Log("L'ennemi a fait " + Damage + " points de dégâts");
-            attTime = Time.time + attCooldown;
+                if (Time.time > attTime)
+                {
+                    Target.GetComponent<PlayerInventory>().ApplyDamage(Damage);
+                    Debug.Log("L'ennemi a fait " + Damage + " points de dégâts");
+                    attTime = Time.time + attCooldown;
+                }
+            }
         }
     }
 
