@@ -3,7 +3,28 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Canvas
+  - DraggingItem
+  - MainInventory
+  - Timer
+  - Panel
+  - CraftSystem
+  - EquipmentSystem
+  - Hotbar
+  - Tooltip
+  - Slots
+  - ResultSlot
+  - Slot
+  - Item
+  - ItemIcon
+  - Collide
+  - test
+  - Ennemy
+  - SphereMana
+  - Enemy
+  - ObjetSpe
+  - EnemyBossLancer
   layers:
   - Default
   - TransparentFX
@@ -14,7 +35,7 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
+  - Player
   - 
   - 
   - 
