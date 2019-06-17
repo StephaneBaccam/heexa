@@ -34,7 +34,8 @@ public class CameraScript : MonoBehaviour
 
     void Start()
     {
-
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         Vector3 angles = transform.eulerAngles;
         xDeg = angles.x;
         yDeg = angles.y;
@@ -48,7 +49,7 @@ public class CameraScript : MonoBehaviour
 
     void Update()
     {
-
+        
         if (desiredDistance == 10)
         {
 

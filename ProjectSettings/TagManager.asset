@@ -25,6 +25,7 @@ TagManager:
   - Enemy
   - ObjetSpe
   - EnemyBossLancer
+  - EnemyBossFairy
   layers:
   - Default
   - TransparentFX

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class CharacterMotor : MonoBehaviour
 {
+    
     //Scripts playerinventory pour récupérer les variables 
     PlayerInventory playerInv;
 
@@ -188,6 +189,12 @@ public class CharacterMotor : MonoBehaviour
                 {
                     print(hit.transform.name + " detecté ");
                     hit.transform.GetComponent<EnemyAILancer>().ApplyDamage(playerInv.currentDamage);
+                }
+
+                if (hit.transform.tag == "EnemyBossFairy")
+                {
+                    print(hit.transform.name + " detecté ");
+                    hit.transform.GetComponent<EnemyAIFairy>().ApplyDamage(playerInv.currentDamage);
                 }
             }
         }

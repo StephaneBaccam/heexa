@@ -5,8 +5,7 @@ using UnityEngine.EventSystems;
 
 public class PlayerInventory : MonoBehaviour
 {
-
-
+    public GameObject GameOverUI;
     public GameObject inventory;
     public GameObject characterSystem;
     public GameObject craftSystem;
@@ -218,6 +217,9 @@ public class PlayerInventory : MonoBehaviour
     public void Dead()
     {
         characterMotor.isDead = true; //Désactive la possibilité du perso à se déplacer
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        this.GameOverUI.SetActive(true);
         playerAnimation.Play("die"); 
     }
 
@@ -343,10 +345,14 @@ public class PlayerInventory : MonoBehaviour
         {
             if (!characterSystem.activeSelf)
             {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
                 characterSystemInventory.openInventory();
             }
             else
             {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
                 if (toolTip != null)
                     toolTip.deactivateTooltip();
                 characterSystemInventory.closeInventory();
@@ -357,10 +363,14 @@ public class PlayerInventory : MonoBehaviour
         {
             if (!inventory.activeSelf)
             {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
                 mainInventory.openInventory();
             }
             else
             {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
                 if (toolTip != null)
                     toolTip.deactivateTooltip();
                 mainInventory.closeInventory();
