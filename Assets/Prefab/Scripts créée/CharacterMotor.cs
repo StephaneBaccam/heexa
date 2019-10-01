@@ -130,13 +130,13 @@ public class CharacterMotor : MonoBehaviour
             //Rotation à gauche
             if (Input.GetKey(toucheRotGauche))
             {
-                transform.Rotate(0, -vitRotation * Time.deltaTime, 0);
+                transform.position += transform.TransformDirection(Vector3.left) * Time.deltaTime * vitMarcher;
             }
 
             //Rotation à droite
             if (Input.GetKey(toucheRotDroite))
             {
-                transform.Rotate(0, vitRotation * Time.deltaTime, 0);
+                transform.position -= transform.TransformDirection(Vector3.left) * Time.deltaTime * vitMarcher;
             }
 
             //Sauter
